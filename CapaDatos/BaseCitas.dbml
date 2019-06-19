@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ProyectoCitas" Class="BaseCitasDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-PPBPT44\SQLEXPRESS;Initial Catalog=ProyectoCitas;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="ProyectoCitasConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Citas" Member="Citas">
+    <Type Name="Citas">
+      <Column Name="cita_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cita_estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="paci_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="medhor_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="EspecialidadMedico_Citas" Member="EspecialidadMedico" ThisKey="espmed_id" OtherKey="espmed_id" Type="EspecialidadMedico" IsForeignKey="true" />
+      <Association Name="Medico_Horario_Citas" Member="Medico_Horario" ThisKey="medhor_id" OtherKey="medhor_id" Type="Medico_Horario" IsForeignKey="true" />
+      <Association Name="Paciente_Citas" Member="Paciente" ThisKey="paci_id" OtherKey="paci_id" Type="Paciente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Especialidad" Member="Especialidad">
+    <Type Name="Especialidad">
+      <Column Name="espe_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="espe_descripcion" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Especialidad_EspecialidadMedico" Member="EspecialidadMedico" ThisKey="espe_id" OtherKey="espe_id" Type="EspecialidadMedico" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EspecialidadMedico" Member="EspecialidadMedico">
+    <Type Name="EspecialidadMedico">
+      <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="med_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="espe_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="EspecialidadMedico_Citas" Member="Citas" ThisKey="espmed_id" OtherKey="espmed_id" Type="Citas" />
+      <Association Name="Especialidad_EspecialidadMedico" Member="Especialidad" ThisKey="espe_id" OtherKey="espe_id" Type="Especialidad" IsForeignKey="true" />
+      <Association Name="Medico_EspecialidadMedico" Member="Medico" ThisKey="med_id" OtherKey="med_id" Type="Medico" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Medico" Member="Medico">
+    <Type Name="Medico">
+      <Column Name="med_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="med_abreviatura" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="per_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Medico_EspecialidadMedico" Member="EspecialidadMedico" ThisKey="med_id" OtherKey="med_id" Type="EspecialidadMedico" />
+      <Association Name="Medico_Medico_Horario" Member="Medico_Horario" ThisKey="med_id" OtherKey="med_id" Type="Medico_Horario" />
+      <Association Name="Persona_Medico" Member="Persona" ThisKey="per_id" OtherKey="per_id" Type="Persona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Medico_Horario" Member="Medico_Horario">
+    <Type Name="Medico_Horario">
+      <Column Name="medhor_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="med_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="medhor_fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="medhor_hora" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Medico_Horario_Citas" Member="Citas" ThisKey="medhor_id" OtherKey="medhor_id" Type="Citas" />
+      <Association Name="Medico_Medico_Horario" Member="Medico" ThisKey="med_id" OtherKey="med_id" Type="Medico" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Paciente" Member="Paciente">
+    <Type Name="Paciente">
+      <Column Name="paci_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="paci_peso" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="paci_tiposangre" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="paci_estatura" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="paci_sintoma" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="per_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Paciente_Citas" Member="Citas" ThisKey="paci_id" OtherKey="paci_id" Type="Citas" />
+      <Association Name="Persona_Paciente" Member="Persona" ThisKey="per_id" OtherKey="per_id" Type="Persona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Persona" Member="Persona">
+    <Type Name="Persona">
+      <Column Name="per_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="per_nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_cedula" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="per_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_telefono" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="per_fechanacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="per_genero" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_direccion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="per_estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="per_fechaCreacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="per_usuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_contrasenia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id_tipousu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Persona_Medico" Member="Medico" ThisKey="per_id" OtherKey="per_id" Type="Medico" />
+      <Association Name="Persona_Paciente" Member="Paciente" ThisKey="per_id" OtherKey="per_id" Type="Paciente" />
+      <Association Name="Tipo_usuario_Persona" Member="Tipo_usuario" ThisKey="id_tipousu" OtherKey="id_tipousu" Type="Tipo_usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tipo_usuario" Member="Tipo_usuario">
+    <Type Name="Tipo_usuario">
+      <Column Name="id_tipousu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Tipo_usuario_Persona" Member="Persona" ThisKey="id_tipousu" OtherKey="id_tipousu" Type="Persona" />
+    </Type>
+  </Table>
+</Database>

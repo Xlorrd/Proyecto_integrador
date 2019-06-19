@@ -1,0 +1,21 @@
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.pdb
+C:\Users\Xlorrd\Documents\Mega\Mis ejerciocios\C#\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\IntentoFinalinq\CapaDatos\obj\Debug\CapaDatos.pdb
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Debug\CapaDatos.pdb

@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Metodos</title>
+<script type="text/javascript" src="jquery.min.js"></script> 
+<link rel="stylesheet" href="bootstrap.min.css">
+<script type="text/javascript" src="bootstrap.min.js"></script> 
+
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-lg-12" >
+			<center><h3 class="">  Calculo de Errores</h3><br><br></center>
+			
+			<div class="col-lg-12" id="VerForm" style="padding-left: 30%; padding-right: 30%;">
+			<center><h5 style="color: read;"> REDONDEO </h5><br></center>
+    			
+     			<form name="frmErrores" id="frmErrores">
+         		   <div class="col-md-12">
+                            <div class="form-group ">
+                                <label for="inputMarca">Ingrese Valor 1:</label>
+                                <input id="txtValor1" placeholder="Valor 1" type="text"  name="txtValorReal" required class="form-control"   autocomplete="off" />
+                            </div>
+                        </div>
+                       <div class="col-md-12">
+                            <div class="form-group ">
+                                <label for="inputMarca">Ingrese Valor 2:</label>
+                                <input id="txtValor2" placeholder="Valor 2" type="text"  name="txtValorReal" required class="form-control"   autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <center>
+                                 <button type="submit"  name="btnsumar" id="btnsubmit"> Sumar</button>
+                                 <button type="submit"  name="btnsumar" id="btnsubmit"> Restar</button>
+                                 <button type="submit"  name="btnsumar" id="btnsubmit"> Multiplicar</button>
+                                 <button type="submit"  name="btnsumar" id="btnsubmit"> dividir</button>
+                                </center>
+                            </div>
+                        </div>
+                    
+                    
+                	<div class="row">
+                		<div class="col-md-4">
+                            <div class="form-group"><label for="inputMarca">Tipo:</label>
+                            <select class="form-control" name="cboTipo"  id="cboTipo" required  >
+                            	<option  value="R">Redondeo</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label for="inputMarca">Valor:</label>
+                                <input id="txtValorReal" placeholder="Valor en Postivo " type="text"  name="txtValorReal" required class="form-control"   autocomplete="off" />
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label for="inputMarca">Decimales:</label>
+                                <select class="form-control" name="cboDecimales" id="cboDecimales" required>
+                                	<option  value="">Seleccione:</option>
+									<option  value="1">décimas</option>
+									<option  value="2">centésimas</option>
+									<option  value="3">milésimas</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >   
+                		<div class="col-md-12" style="text-align: center">
+                        	<input id="txtValorAproxi"  type="text" placeholder="Total" name="txtValorAproxi"  class="form-control"   readonly/>
+                		</div>
+            		</div>
+                    <br>
+					<center><h5 style="color: read;"> Errores <br> Absoluto-Relativo-Porcentual</h5><br></center>
+         			<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <input id="txtValorRealTotal" placeholder="Valor Real" type="text"  name="txtValorRealTotal" required class="form-control"  autofocus autocomplete="off" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <input id="txtValorAproxiTotal" placeholder="Valor Aproximado" type="text"  name="txtValorAproxiTotal" required class="form-control"  autofocus autocomplete="off" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                               	<label for="">Error Absoluto:</label>
+                                <input id="txtErrorAbsoluto" placeholder="Total" type="text"  name="txtErrorAbsoluto" required class="form-control"  autofocus autocomplete="off" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                               	<label for="">Error Relativo:</label>
+                                <input id="txtErrorRelativo" placeholder="Total" type="text"  name="txtErrorRelativo" required class="form-control"  autofocus autocomplete="off" readonly/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                               	<label for="">Error Porcentual:</label>
+                                <input id="txtErrorPorcentual" placeholder="Total" type="text"  name="txtErrorPorcentual" required class="form-control"  autofocus autocomplete="off" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >   
+                		<div class="col-md-12" style="text-align: center">
+                        	<button type="submit"  name="btnsubmit" id="btnsubmit"> Calcular</button>
+                		</div>
+            		</div>
+        		</form>
+   			</div>
+        </div>
+	</div>		
+</body>
+</html>
+<script>
+	$("#txtValorReal").keyup(validarCero);
+	$("form#frmErrores").submit(CalculoErrores);
+	
+	function validarCero(){
+		var valorReal= $("#txtValorReal").val();
+		if(parseFloat(valorReal)<= 0.00){
+			$("#txtValorReal").css({'color':'red','text-decoration':'line-through'});
+			$("#btnsubmit").attr('disabled',true);
+		}else{
+			$("#txtValorReal").css({'color':'#555','text-decoration':'none'});
+			$("#btnsubmit").attr('disabled',false);
+		}
+	}
+	function CalculoErrores(e){
+		
+		e.preventDefault();
+		var valorReal= $("#txtValorReal").val();
+		var tipo= $("#cboTipo").val();
+		var decimal= $("#cboDecimales").val();
+		var decimalTotal=parseInt(decimal);
+		
+			if(tipo=='T'){
+			var errorRedondeo= Math.floor(valorReal); 
+			$("#txtValorAproxi").val(errorRedondeo);
+			}
+			if(tipo=='R' ){
+				var errorRedondeo= Number.parseFloat(valorReal).toFixed(decimalTotal)
+				$("#txtValorAproxi").val(errorRedondeo);
+			}
+
+			var errorAb=(valorReal-errorRedondeo);
+			var errorAbTotal= Math.abs(errorAb);
+			var errorRelativo= (errorAbTotal/valorReal);
+			var errorPorcentual= (errorRelativo*100);
+			var errorTruncamiento= parseInt (errorAbTotal * 100) / 100;
+			
+            $("#txtErrorAbsoluto").val(errorAbTotal.toFixed(5));
+			$("#txtErrorRelativo").val(errorRelativo.toFixed(5));
+			$("#txtErrorPorcentual").val(errorPorcentual.toFixed(5)+"%");
+			$("#txtValorRealTotal").val(valorReal);
+			$("#txtValorAproxiTotal").val(errorRedondeo);
+		
+		
+		
+	}
+	
+	
+</script>

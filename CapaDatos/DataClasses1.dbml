@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MASTERINDEX" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-PPBPT44\SQLEXPRESS;Initial Catalog=MASTERINDEX;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="MASTERINDEXConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Tbl_Productos" Member="Tbl_Productos">
+    <Type Name="Tbl_Productos">
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pro_nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pro_cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pro_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="prov_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tbl_Proveedor_Tbl_Productos" Member="Tbl_Proveedor" ThisKey="prov_id" OtherKey="prov_id" Type="Tbl_Proveedor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tbl_Proveedor" Member="Tbl_Proveedor">
+    <Type Name="Tbl_Proveedor">
+      <Column Name="prov_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="prov_nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="prov_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="Tbl_Proveedor_Tbl_Productos" Member="Tbl_Productos" ThisKey="prov_id" OtherKey="prov_id" Type="Tbl_Productos" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tbl_Tipousuario" Member="Tbl_Tipousuario">
+    <Type Name="Tbl_Tipousuario">
+      <Column Name="Tusu_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tusu_Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Tusu_Estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="Tbl_Tipousuario_Tbl_Usuario" Member="Tbl_Usuario" ThisKey="Tusu_id" OtherKey="Tusu_id" Type="Tbl_Usuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tbl_Usuario" Member="Tbl_Usuario">
+    <Type Name="Tbl_Usuario">
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usu_cedula" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_nombre" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_direccion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_telefono" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_fechacreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_contrasenia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_nomlogin" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="usu_correo" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Tusu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Tbl_Tipousuario_Tbl_Usuario" Member="Tbl_Tipousuario" ThisKey="Tusu_id" OtherKey="Tusu_id" Type="Tbl_Tipousuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
