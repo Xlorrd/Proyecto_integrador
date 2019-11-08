@@ -43,8 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao_comprador.cs" />
+    <Compile Include="Dao_producto.cs" />
+    <Compile Include="LogicaCitas.cs" />
+    <Compile Include="LogicaEspecialidad.cs" />
+    <Compile Include="LogicaEspecialidadMedico.cs" />
+    <Compile Include="LogicaMedico.cs" />
+    <Compile Include="LogicaMedicoHorario.cs" />
+    <Compile Include="LogicaPaciente.cs" />
+    <Compile Include="LogicaPersona.cs" />
+    <Compile Include="Logica_Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TipoUsuarioLogica.cs" />
+    <Compile Include="LogicaTipoUsuario.cs" />
     <Compile Include="UsuarioLogica.cs" />
   </ItemGroup>
   <ItemGroup>

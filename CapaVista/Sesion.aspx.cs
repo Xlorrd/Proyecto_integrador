@@ -62,10 +62,10 @@ namespace CapaVista
             {
                 if (existe)
                 {
-                    Tbl_Usuario usuario = new Tbl_Usuario();
+                    Persona usuario = new Persona();
                     usuario = UsuarioLogica.Autentificarlogin(txt_usu.Text, txt_pas.Text);
                    
-                    int tipousuario = usuario.Tusu_id;
+                    int tipousuario = Convert.ToInt32( usuario.id_tipousu);
 
                     if (tipousuario == 1)
                     {
@@ -87,8 +87,7 @@ namespace CapaVista
                   //  lblMensaje.Visible = true;
                     txt_pas.Attributes.Add("placeholder", "Contraseña o usuario incorrecto");
                     return;
-                }
-                
+                }                
 
             }
 

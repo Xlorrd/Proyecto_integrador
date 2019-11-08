@@ -33,12 +33,18 @@ namespace CapaDatos
     partial void InsertCitas(Citas instance);
     partial void UpdateCitas(Citas instance);
     partial void DeleteCitas(Citas instance);
+    partial void InsertTbl_usuario(Tbl_usuario instance);
+    partial void UpdateTbl_usuario(Tbl_usuario instance);
+    partial void DeleteTbl_usuario(Tbl_usuario instance);
     partial void InsertEspecialidad(Especialidad instance);
     partial void UpdateEspecialidad(Especialidad instance);
     partial void DeleteEspecialidad(Especialidad instance);
     partial void InsertEspecialidadMedico(EspecialidadMedico instance);
     partial void UpdateEspecialidadMedico(EspecialidadMedico instance);
     partial void DeleteEspecialidadMedico(EspecialidadMedico instance);
+    partial void InsertHistorial_Clinico(Historial_Clinico instance);
+    partial void UpdateHistorial_Clinico(Historial_Clinico instance);
+    partial void DeleteHistorial_Clinico(Historial_Clinico instance);
     partial void InsertMedico(Medico instance);
     partial void UpdateMedico(Medico instance);
     partial void DeleteMedico(Medico instance);
@@ -57,7 +63,7 @@ namespace CapaDatos
     #endregion
 		
 		public BaseCitasDataContext() : 
-				base(global::CapaDatos.Properties.Settings.Default.ProyectoCitasConnectionString, mappingSource)
+				base(global::CapaDatos.Properties.Settings.Default.ProyectoCitasConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -94,6 +100,14 @@ namespace CapaDatos
 			}
 		}
 		
+		public System.Data.Linq.Table<Tbl_usuario> Tbl_usuario
+		{
+			get
+			{
+				return this.GetTable<Tbl_usuario>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Especialidad> Especialidad
 		{
 			get
@@ -107,6 +121,14 @@ namespace CapaDatos
 			get
 			{
 				return this.GetTable<EspecialidadMedico>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Historial_Clinico> Historial_Clinico
+		{
+			get
+			{
+				return this.GetTable<Historial_Clinico>();
 			}
 		}
 		
@@ -149,6 +171,265 @@ namespace CapaDatos
 				return this.GetTable<Tipo_usuario>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Migrar_datos_persona")]
+		public ISingleResult<Migrar_datos_personaResult> Migrar_datos_persona()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Migrar_datos_personaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_Citas")]
+		public ISingleResult<Mostrar_CitasResult> Mostrar_Citas()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_CitasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_Citas_xpacienteid")]
+		public ISingleResult<Mostrar_Citas_xpacienteidResult> Mostrar_Citas_xpacienteid([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> paci_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), paci_id);
+			return ((ISingleResult<Mostrar_Citas_xpacienteidResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_espe_mas_medico")]
+		public ISingleResult<Mostrar_espe_mas_medicoResult> Mostrar_espe_mas_medico()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_espe_mas_medicoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_espe_medico")]
+		public ISingleResult<Mostrar_espe_medicoResult> Mostrar_espe_medico()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_espe_medicoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_especialidad")]
+		public ISingleResult<Mostrar_especialidadResult> Mostrar_especialidad()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_especialidadResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_medico")]
+		public ISingleResult<Mostrar_medicoResult> Mostrar_medico()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_medicoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_medico_fecha_horario")]
+		public ISingleResult<Mostrar_medico_fecha_horarioResult> Mostrar_medico_fecha_horario()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_medico_fecha_horarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_medico_horario")]
+		public ISingleResult<Mostrar_medico_horarioResult> Mostrar_medico_horario()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_medico_horarioResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_paciente")]
+		public ISingleResult<Mostrar_pacienteResult> Mostrar_paciente()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_pacienteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_Persona")]
+		public ISingleResult<Mostrar_PersonaResult> Mostrar_Persona()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_PersonaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_personas")]
+		public ISingleResult<Mostrar_personasResult> Mostrar_personas()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_personasResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_cita_id")]
+		public ISingleResult<sp_buscar_cita_idResult> sp_buscar_cita_id([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cita_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cita_id);
+			return ((ISingleResult<sp_buscar_cita_idResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_cita_xpaciente")]
+		public ISingleResult<sp_buscar_cita_xpacienteResult> sp_buscar_cita_xpaciente([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string nombres)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombres);
+			return ((ISingleResult<sp_buscar_cita_xpacienteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_especialidad_medico_xid")]
+		public ISingleResult<sp_buscar_especialidad_medico_xidResult> sp_buscar_especialidad_medico_xid([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> espe_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), espe_id);
+			return ((ISingleResult<sp_buscar_especialidad_medico_xidResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_especialidad_xdescripcion")]
+		public ISingleResult<sp_buscar_especialidad_xdescripcionResult> sp_buscar_especialidad_xdescripcion([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string espe_descripcion)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), espe_descripcion);
+			return ((ISingleResult<sp_buscar_especialidad_xdescripcionResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_espemed_xmedico")]
+		public ISingleResult<sp_buscar_espemed_xmedicoResult> sp_buscar_espemed_xmedico([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string nombre)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre);
+			return ((ISingleResult<sp_buscar_espemed_xmedicoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_medico_horario_xespemed")]
+		public ISingleResult<sp_buscar_medico_horario_xespemedResult> sp_buscar_medico_horario_xespemed([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<sp_buscar_medico_horario_xespemedResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_medico_horario_xmedico")]
+		public ISingleResult<sp_buscar_medico_horario_xmedicoResult> sp_buscar_medico_horario_xmedico([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string nombre)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre);
+			return ((ISingleResult<sp_buscar_medico_horario_xmedicoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_medico_xpersona")]
+		public ISingleResult<sp_buscar_medico_xpersonaResult> sp_buscar_medico_xpersona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string nombre)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre);
+			return ((ISingleResult<sp_buscar_medico_xpersonaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_paciente_xnombre")]
+		public ISingleResult<sp_buscar_paciente_xnombreResult> sp_buscar_paciente_xnombre([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string nombre)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre);
+			return ((ISingleResult<sp_buscar_paciente_xnombreResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_persona_IDE")]
+		public ISingleResult<sp_buscar_persona_IDEResult> sp_buscar_persona_IDE([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> per_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), per_id);
+			return ((ISingleResult<sp_buscar_persona_IDEResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_persona_xapellido")]
+		public ISingleResult<sp_buscar_persona_xapellidoResult> sp_buscar_persona_xapellido([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string apellido)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), apellido);
+			return ((ISingleResult<sp_buscar_persona_xapellidoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_persona_xDNI")]
+		public ISingleResult<sp_buscar_persona_xDNIResult> sp_buscar_persona_xDNI([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_cedula)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), per_cedula);
+			return ((ISingleResult<sp_buscar_persona_xDNIResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_buscar_persona_xroll")]
+		public ISingleResult<sp_buscar_persona_xrollResult> sp_buscar_persona_xroll([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string roll)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roll);
+			return ((ISingleResult<sp_buscar_persona_xrollResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_cancelar_cita")]
+		public int sp_cancelar_cita([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cita_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cita_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_cita")]
+		public int sp_eliminar_cita([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cita_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cita_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_especialidad")]
+		public int sp_eliminar_especialidad([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> espe_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), espe_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_espemed")]
+		public int sp_eliminar_espemed([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> espmed_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), espmed_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_medico")]
+		public int sp_eliminar_medico([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> med_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), med_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_medico_horario")]
+		public int sp_eliminar_medico_horario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> medhor_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), medhor_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_paciente")]
+		public int sp_eliminar_paciente([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> paci_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), paci_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_eliminar_persona")]
+		public int sp_eliminar_persona([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> per_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), per_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_obtener_pacientes")]
+		public ISingleResult<sp_obtener_pacientesResult> sp_obtener_pacientes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombres", DbType="NVarChar(50)")] string nombres)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombres);
+			return ((ISingleResult<sp_obtener_pacientesResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_registrar_persona_login")]
+		public int sp_registrar_persona_login([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_nombres, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_apellidos, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_usuario, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_contrasenia, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_estado, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(100)")] string per_fechaCreacion, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id_tipousu)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), per_nombres, per_apellidos, per_email, per_usuario, per_contrasenia, per_estado, per_fechaCreacion, id_tipousu);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_reservar_medico_horario")]
+		public int sp_reservar_medico_horario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> medhor_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), medhor_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.tempo_mostrar_usuario")]
+		public ISingleResult<tempo_mostrar_usuarioResult> tempo_mostrar_usuario()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<tempo_mostrar_usuarioResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Citas")]
@@ -165,9 +446,9 @@ namespace CapaDatos
 		
 		private int _medhor_id;
 		
-		private int _espmed_id;
+		private string _cita_motivo;
 		
-		private EntityRef<EspecialidadMedico> _EspecialidadMedico;
+		private EntitySet<Historial_Clinico> _Historial_Clinico;
 		
 		private EntityRef<Medico_Horario> _Medico_Horario;
 		
@@ -185,13 +466,13 @@ namespace CapaDatos
     partial void Onpaci_idChanged();
     partial void Onmedhor_idChanging(int value);
     partial void Onmedhor_idChanged();
-    partial void Onespmed_idChanging(int value);
-    partial void Onespmed_idChanged();
+    partial void Oncita_motivoChanging(string value);
+    partial void Oncita_motivoChanged();
     #endregion
 		
 		public Citas()
 		{
-			this._EspecialidadMedico = default(EntityRef<EspecialidadMedico>);
+			this._Historial_Clinico = new EntitySet<Historial_Clinico>(new Action<Historial_Clinico>(this.attach_Historial_Clinico), new Action<Historial_Clinico>(this.detach_Historial_Clinico));
 			this._Medico_Horario = default(EntityRef<Medico_Horario>);
 			this._Paciente = default(EntityRef<Paciente>);
 			OnCreated();
@@ -285,61 +566,36 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espmed_id", DbType="Int NOT NULL")]
-		public int espmed_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cita_motivo", DbType="NChar(500) NOT NULL", CanBeNull=false)]
+		public string cita_motivo
 		{
 			get
 			{
-				return this._espmed_id;
+				return this._cita_motivo;
 			}
 			set
 			{
-				if ((this._espmed_id != value))
+				if ((this._cita_motivo != value))
 				{
-					if (this._EspecialidadMedico.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onespmed_idChanging(value);
+					this.Oncita_motivoChanging(value);
 					this.SendPropertyChanging();
-					this._espmed_id = value;
-					this.SendPropertyChanged("espmed_id");
-					this.Onespmed_idChanged();
+					this._cita_motivo = value;
+					this.SendPropertyChanged("cita_motivo");
+					this.Oncita_motivoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EspecialidadMedico_Citas", Storage="_EspecialidadMedico", ThisKey="espmed_id", OtherKey="espmed_id", IsForeignKey=true)]
-		public EspecialidadMedico EspecialidadMedico
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Citas_Historial_Clinico", Storage="_Historial_Clinico", ThisKey="cita_id", OtherKey="cita_id")]
+		public EntitySet<Historial_Clinico> Historial_Clinico
 		{
 			get
 			{
-				return this._EspecialidadMedico.Entity;
+				return this._Historial_Clinico;
 			}
 			set
 			{
-				EspecialidadMedico previousValue = this._EspecialidadMedico.Entity;
-				if (((previousValue != value) 
-							|| (this._EspecialidadMedico.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._EspecialidadMedico.Entity = null;
-						previousValue.Citas.Remove(this);
-					}
-					this._EspecialidadMedico.Entity = value;
-					if ((value != null))
-					{
-						value.Citas.Add(this);
-						this._espmed_id = value.espmed_id;
-					}
-					else
-					{
-						this._espmed_id = default(int);
-					}
-					this.SendPropertyChanged("EspecialidadMedico");
-				}
+				this._Historial_Clinico.Assign(value);
 			}
 		}
 		
@@ -430,6 +686,128 @@ namespace CapaDatos
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Historial_Clinico(Historial_Clinico entity)
+		{
+			this.SendPropertyChanging();
+			entity.Citas = this;
+		}
+		
+		private void detach_Historial_Clinico(Historial_Clinico entity)
+		{
+			this.SendPropertyChanging();
+			entity.Citas = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tbl_usuario")]
+	public partial class Tbl_usuario : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _usu_id;
+		
+		private string _per_id;
+		
+		private System.Data.Linq.Binary _usu_foto;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onusu_idChanging(int value);
+    partial void Onusu_idChanged();
+    partial void Onper_idChanging(string value);
+    partial void Onper_idChanged();
+    partial void Onusu_fotoChanging(System.Data.Linq.Binary value);
+    partial void Onusu_fotoChanged();
+    #endregion
+		
+		public Tbl_usuario()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int usu_id
+		{
+			get
+			{
+				return this._usu_id;
+			}
+			set
+			{
+				if ((this._usu_id != value))
+				{
+					this.Onusu_idChanging(value);
+					this.SendPropertyChanging();
+					this._usu_id = value;
+					this.SendPropertyChanged("usu_id");
+					this.Onusu_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_id", DbType="VarChar(50)")]
+		public string per_id
+		{
+			get
+			{
+				return this._per_id;
+			}
+			set
+			{
+				if ((this._per_id != value))
+				{
+					this.Onper_idChanging(value);
+					this.SendPropertyChanging();
+					this._per_id = value;
+					this.SendPropertyChanged("per_id");
+					this.Onper_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_foto", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary usu_foto
+		{
+			get
+			{
+				return this._usu_foto;
+			}
+			set
+			{
+				if ((this._usu_foto != value))
+				{
+					this.Onusu_fotoChanging(value);
+					this.SendPropertyChanging();
+					this._usu_foto = value;
+					this.SendPropertyChanged("usu_foto");
+					this.Onusu_fotoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Especialidad")]
@@ -442,6 +820,8 @@ namespace CapaDatos
 		
 		private string _espe_descripcion;
 		
+		private char _espe_estado;
+		
 		private EntitySet<EspecialidadMedico> _EspecialidadMedico;
 		
     #region Definiciones de métodos de extensibilidad
@@ -452,6 +832,8 @@ namespace CapaDatos
     partial void Onespe_idChanged();
     partial void Onespe_descripcionChanging(string value);
     partial void Onespe_descripcionChanged();
+    partial void Onespe_estadoChanging(char value);
+    partial void Onespe_estadoChanged();
     #endregion
 		
 		public Especialidad()
@@ -480,7 +862,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espe_descripcion", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espe_descripcion", DbType="NChar(50) NOT NULL", CanBeNull=false)]
 		public string espe_descripcion
 		{
 			get
@@ -496,6 +878,26 @@ namespace CapaDatos
 					this._espe_descripcion = value;
 					this.SendPropertyChanged("espe_descripcion");
 					this.Onespe_descripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espe_estado", DbType="Char(1) NOT NULL")]
+		public char espe_estado
+		{
+			get
+			{
+				return this._espe_estado;
+			}
+			set
+			{
+				if ((this._espe_estado != value))
+				{
+					this.Onespe_estadoChanging(value);
+					this.SendPropertyChanging();
+					this._espe_estado = value;
+					this.SendPropertyChanged("espe_estado");
+					this.Onespe_estadoChanged();
 				}
 			}
 		}
@@ -558,7 +960,9 @@ namespace CapaDatos
 		
 		private int _espe_id;
 		
-		private EntitySet<Citas> _Citas;
+		private EntitySet<Historial_Clinico> _Historial_Clinico;
+		
+		private EntitySet<Medico_Horario> _Medico_Horario;
 		
 		private EntityRef<Especialidad> _Especialidad;
 		
@@ -578,7 +982,8 @@ namespace CapaDatos
 		
 		public EspecialidadMedico()
 		{
-			this._Citas = new EntitySet<Citas>(new Action<Citas>(this.attach_Citas), new Action<Citas>(this.detach_Citas));
+			this._Historial_Clinico = new EntitySet<Historial_Clinico>(new Action<Historial_Clinico>(this.attach_Historial_Clinico), new Action<Historial_Clinico>(this.detach_Historial_Clinico));
+			this._Medico_Horario = new EntitySet<Medico_Horario>(new Action<Medico_Horario>(this.attach_Medico_Horario), new Action<Medico_Horario>(this.detach_Medico_Horario));
 			this._Especialidad = default(EntityRef<Especialidad>);
 			this._Medico = default(EntityRef<Medico>);
 			OnCreated();
@@ -652,16 +1057,29 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EspecialidadMedico_Citas", Storage="_Citas", ThisKey="espmed_id", OtherKey="espmed_id")]
-		public EntitySet<Citas> Citas
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EspecialidadMedico_Historial_Clinico", Storage="_Historial_Clinico", ThisKey="espmed_id", OtherKey="espmed_id")]
+		public EntitySet<Historial_Clinico> Historial_Clinico
 		{
 			get
 			{
-				return this._Citas;
+				return this._Historial_Clinico;
 			}
 			set
 			{
-				this._Citas.Assign(value);
+				this._Historial_Clinico.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EspecialidadMedico_Medico_Horario", Storage="_Medico_Horario", ThisKey="espmed_id", OtherKey="espmed_id")]
+		public EntitySet<Medico_Horario> Medico_Horario
+		{
+			get
+			{
+				return this._Medico_Horario;
+			}
+			set
+			{
+				this._Medico_Horario.Assign(value);
 			}
 		}
 		
@@ -753,16 +1171,381 @@ namespace CapaDatos
 			}
 		}
 		
-		private void attach_Citas(Citas entity)
+		private void attach_Historial_Clinico(Historial_Clinico entity)
 		{
 			this.SendPropertyChanging();
 			entity.EspecialidadMedico = this;
 		}
 		
-		private void detach_Citas(Citas entity)
+		private void detach_Historial_Clinico(Historial_Clinico entity)
 		{
 			this.SendPropertyChanging();
 			entity.EspecialidadMedico = null;
+		}
+		
+		private void attach_Medico_Horario(Medico_Horario entity)
+		{
+			this.SendPropertyChanging();
+			entity.EspecialidadMedico = this;
+		}
+		
+		private void detach_Medico_Horario(Medico_Horario entity)
+		{
+			this.SendPropertyChanging();
+			entity.EspecialidadMedico = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Historial_Clinico")]
+	public partial class Historial_Clinico : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _histocli_id;
+		
+		private System.Nullable<int> _cita_id;
+		
+		private int _paci_id;
+		
+		private int _espmed_id;
+		
+		private string _histocli_diagnostico;
+		
+		private string _histocli_alergia;
+		
+		private string _histocli_receta;
+		
+		private string _histocli_enfermedad;
+		
+		private EntityRef<Citas> _Citas;
+		
+		private EntityRef<EspecialidadMedico> _EspecialidadMedico;
+		
+		private EntityRef<Paciente> _Paciente;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onhistocli_idChanging(int value);
+    partial void Onhistocli_idChanged();
+    partial void Oncita_idChanging(System.Nullable<int> value);
+    partial void Oncita_idChanged();
+    partial void Onpaci_idChanging(int value);
+    partial void Onpaci_idChanged();
+    partial void Onespmed_idChanging(int value);
+    partial void Onespmed_idChanged();
+    partial void Onhistocli_diagnosticoChanging(string value);
+    partial void Onhistocli_diagnosticoChanged();
+    partial void Onhistocli_alergiaChanging(string value);
+    partial void Onhistocli_alergiaChanged();
+    partial void Onhistocli_recetaChanging(string value);
+    partial void Onhistocli_recetaChanged();
+    partial void Onhistocli_enfermedadChanging(string value);
+    partial void Onhistocli_enfermedadChanged();
+    #endregion
+		
+		public Historial_Clinico()
+		{
+			this._Citas = default(EntityRef<Citas>);
+			this._EspecialidadMedico = default(EntityRef<EspecialidadMedico>);
+			this._Paciente = default(EntityRef<Paciente>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_histocli_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int histocli_id
+		{
+			get
+			{
+				return this._histocli_id;
+			}
+			set
+			{
+				if ((this._histocli_id != value))
+				{
+					this.Onhistocli_idChanging(value);
+					this.SendPropertyChanging();
+					this._histocli_id = value;
+					this.SendPropertyChanged("histocli_id");
+					this.Onhistocli_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cita_id", DbType="Int")]
+		public System.Nullable<int> cita_id
+		{
+			get
+			{
+				return this._cita_id;
+			}
+			set
+			{
+				if ((this._cita_id != value))
+				{
+					if (this._Citas.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncita_idChanging(value);
+					this.SendPropertyChanging();
+					this._cita_id = value;
+					this.SendPropertyChanged("cita_id");
+					this.Oncita_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_id", DbType="Int NOT NULL")]
+		public int paci_id
+		{
+			get
+			{
+				return this._paci_id;
+			}
+			set
+			{
+				if ((this._paci_id != value))
+				{
+					if (this._Paciente.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onpaci_idChanging(value);
+					this.SendPropertyChanging();
+					this._paci_id = value;
+					this.SendPropertyChanged("paci_id");
+					this.Onpaci_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espmed_id", DbType="Int NOT NULL")]
+		public int espmed_id
+		{
+			get
+			{
+				return this._espmed_id;
+			}
+			set
+			{
+				if ((this._espmed_id != value))
+				{
+					if (this._EspecialidadMedico.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onespmed_idChanging(value);
+					this.SendPropertyChanging();
+					this._espmed_id = value;
+					this.SendPropertyChanged("espmed_id");
+					this.Onespmed_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_histocli_diagnostico", DbType="NChar(500) NOT NULL", CanBeNull=false)]
+		public string histocli_diagnostico
+		{
+			get
+			{
+				return this._histocli_diagnostico;
+			}
+			set
+			{
+				if ((this._histocli_diagnostico != value))
+				{
+					this.Onhistocli_diagnosticoChanging(value);
+					this.SendPropertyChanging();
+					this._histocli_diagnostico = value;
+					this.SendPropertyChanged("histocli_diagnostico");
+					this.Onhistocli_diagnosticoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_histocli_alergia", DbType="NChar(500)")]
+		public string histocli_alergia
+		{
+			get
+			{
+				return this._histocli_alergia;
+			}
+			set
+			{
+				if ((this._histocli_alergia != value))
+				{
+					this.Onhistocli_alergiaChanging(value);
+					this.SendPropertyChanging();
+					this._histocli_alergia = value;
+					this.SendPropertyChanged("histocli_alergia");
+					this.Onhistocli_alergiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_histocli_receta", DbType="NChar(500)")]
+		public string histocli_receta
+		{
+			get
+			{
+				return this._histocli_receta;
+			}
+			set
+			{
+				if ((this._histocli_receta != value))
+				{
+					this.Onhistocli_recetaChanging(value);
+					this.SendPropertyChanging();
+					this._histocli_receta = value;
+					this.SendPropertyChanged("histocli_receta");
+					this.Onhistocli_recetaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_histocli_enfermedad", DbType="NChar(500)")]
+		public string histocli_enfermedad
+		{
+			get
+			{
+				return this._histocli_enfermedad;
+			}
+			set
+			{
+				if ((this._histocli_enfermedad != value))
+				{
+					this.Onhistocli_enfermedadChanging(value);
+					this.SendPropertyChanging();
+					this._histocli_enfermedad = value;
+					this.SendPropertyChanged("histocli_enfermedad");
+					this.Onhistocli_enfermedadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Citas_Historial_Clinico", Storage="_Citas", ThisKey="cita_id", OtherKey="cita_id", IsForeignKey=true)]
+		public Citas Citas
+		{
+			get
+			{
+				return this._Citas.Entity;
+			}
+			set
+			{
+				Citas previousValue = this._Citas.Entity;
+				if (((previousValue != value) 
+							|| (this._Citas.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Citas.Entity = null;
+						previousValue.Historial_Clinico.Remove(this);
+					}
+					this._Citas.Entity = value;
+					if ((value != null))
+					{
+						value.Historial_Clinico.Add(this);
+						this._cita_id = value.cita_id;
+					}
+					else
+					{
+						this._cita_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Citas");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EspecialidadMedico_Historial_Clinico", Storage="_EspecialidadMedico", ThisKey="espmed_id", OtherKey="espmed_id", IsForeignKey=true)]
+		public EspecialidadMedico EspecialidadMedico
+		{
+			get
+			{
+				return this._EspecialidadMedico.Entity;
+			}
+			set
+			{
+				EspecialidadMedico previousValue = this._EspecialidadMedico.Entity;
+				if (((previousValue != value) 
+							|| (this._EspecialidadMedico.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EspecialidadMedico.Entity = null;
+						previousValue.Historial_Clinico.Remove(this);
+					}
+					this._EspecialidadMedico.Entity = value;
+					if ((value != null))
+					{
+						value.Historial_Clinico.Add(this);
+						this._espmed_id = value.espmed_id;
+					}
+					else
+					{
+						this._espmed_id = default(int);
+					}
+					this.SendPropertyChanged("EspecialidadMedico");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Paciente_Historial_Clinico", Storage="_Paciente", ThisKey="paci_id", OtherKey="paci_id", IsForeignKey=true)]
+		public Paciente Paciente
+		{
+			get
+			{
+				return this._Paciente.Entity;
+			}
+			set
+			{
+				Paciente previousValue = this._Paciente.Entity;
+				if (((previousValue != value) 
+							|| (this._Paciente.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Paciente.Entity = null;
+						previousValue.Historial_Clinico.Remove(this);
+					}
+					this._Paciente.Entity = value;
+					if ((value != null))
+					{
+						value.Historial_Clinico.Add(this);
+						this._paci_id = value.paci_id;
+					}
+					else
+					{
+						this._paci_id = default(int);
+					}
+					this.SendPropertyChanged("Paciente");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -779,8 +1562,6 @@ namespace CapaDatos
 		private int _per_id;
 		
 		private EntitySet<EspecialidadMedico> _EspecialidadMedico;
-		
-		private EntitySet<Medico_Horario> _Medico_Horario;
 		
 		private EntityRef<Persona> _Persona;
 		
@@ -799,7 +1580,6 @@ namespace CapaDatos
 		public Medico()
 		{
 			this._EspecialidadMedico = new EntitySet<EspecialidadMedico>(new Action<EspecialidadMedico>(this.attach_EspecialidadMedico), new Action<EspecialidadMedico>(this.detach_EspecialidadMedico));
-			this._Medico_Horario = new EntitySet<Medico_Horario>(new Action<Medico_Horario>(this.attach_Medico_Horario), new Action<Medico_Horario>(this.detach_Medico_Horario));
 			this._Persona = default(EntityRef<Persona>);
 			OnCreated();
 		}
@@ -824,7 +1604,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_med_abreviatura", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_med_abreviatura", DbType="VarChar(10)")]
 		public string med_abreviatura
 		{
 			get
@@ -878,19 +1658,6 @@ namespace CapaDatos
 			set
 			{
 				this._EspecialidadMedico.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medico_Medico_Horario", Storage="_Medico_Horario", ThisKey="med_id", OtherKey="med_id")]
-		public EntitySet<Medico_Horario> Medico_Horario
-		{
-			get
-			{
-				return this._Medico_Horario;
-			}
-			set
-			{
-				this._Medico_Horario.Assign(value);
 			}
 		}
 		
@@ -959,18 +1726,6 @@ namespace CapaDatos
 			this.SendPropertyChanging();
 			entity.Medico = null;
 		}
-		
-		private void attach_Medico_Horario(Medico_Horario entity)
-		{
-			this.SendPropertyChanging();
-			entity.Medico = this;
-		}
-		
-		private void detach_Medico_Horario(Medico_Horario entity)
-		{
-			this.SendPropertyChanging();
-			entity.Medico = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Medico_Horario")]
@@ -981,15 +1736,19 @@ namespace CapaDatos
 		
 		private int _medhor_id;
 		
-		private int _med_id;
+		private int _espmed_id;
 		
-		private System.DateTime _medhor_fecha;
+		private string _medhor_fecha;
 		
-		private string _medhor_hora;
+		private string _medhor_hora_ini;
+		
+		private string _medhor_hora_fin;
+		
+		private string _medhor_estado;
 		
 		private EntitySet<Citas> _Citas;
 		
-		private EntityRef<Medico> _Medico;
+		private EntityRef<EspecialidadMedico> _EspecialidadMedico;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -997,18 +1756,22 @@ namespace CapaDatos
     partial void OnCreated();
     partial void Onmedhor_idChanging(int value);
     partial void Onmedhor_idChanged();
-    partial void Onmed_idChanging(int value);
-    partial void Onmed_idChanged();
-    partial void Onmedhor_fechaChanging(System.DateTime value);
+    partial void Onespmed_idChanging(int value);
+    partial void Onespmed_idChanged();
+    partial void Onmedhor_fechaChanging(string value);
     partial void Onmedhor_fechaChanged();
-    partial void Onmedhor_horaChanging(string value);
-    partial void Onmedhor_horaChanged();
+    partial void Onmedhor_hora_iniChanging(string value);
+    partial void Onmedhor_hora_iniChanged();
+    partial void Onmedhor_hora_finChanging(string value);
+    partial void Onmedhor_hora_finChanged();
+    partial void Onmedhor_estadoChanging(string value);
+    partial void Onmedhor_estadoChanged();
     #endregion
 		
 		public Medico_Horario()
 		{
 			this._Citas = new EntitySet<Citas>(new Action<Citas>(this.attach_Citas), new Action<Citas>(this.detach_Citas));
-			this._Medico = default(EntityRef<Medico>);
+			this._EspecialidadMedico = default(EntityRef<EspecialidadMedico>);
 			OnCreated();
 		}
 		
@@ -1032,32 +1795,32 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_med_id", DbType="Int NOT NULL")]
-		public int med_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espmed_id", DbType="Int NOT NULL")]
+		public int espmed_id
 		{
 			get
 			{
-				return this._med_id;
+				return this._espmed_id;
 			}
 			set
 			{
-				if ((this._med_id != value))
+				if ((this._espmed_id != value))
 				{
-					if (this._Medico.HasLoadedOrAssignedValue)
+					if (this._EspecialidadMedico.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.Onmed_idChanging(value);
+					this.Onespmed_idChanging(value);
 					this.SendPropertyChanging();
-					this._med_id = value;
-					this.SendPropertyChanged("med_id");
-					this.Onmed_idChanged();
+					this._espmed_id = value;
+					this.SendPropertyChanged("espmed_id");
+					this.Onespmed_idChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_fecha", DbType="Date NOT NULL")]
-		public System.DateTime medhor_fecha
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string medhor_fecha
 		{
 			get
 			{
@@ -1076,22 +1839,62 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_hora", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string medhor_hora
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_hora_ini", DbType="VarChar(50)")]
+		public string medhor_hora_ini
 		{
 			get
 			{
-				return this._medhor_hora;
+				return this._medhor_hora_ini;
 			}
 			set
 			{
-				if ((this._medhor_hora != value))
+				if ((this._medhor_hora_ini != value))
 				{
-					this.Onmedhor_horaChanging(value);
+					this.Onmedhor_hora_iniChanging(value);
 					this.SendPropertyChanging();
-					this._medhor_hora = value;
-					this.SendPropertyChanged("medhor_hora");
-					this.Onmedhor_horaChanged();
+					this._medhor_hora_ini = value;
+					this.SendPropertyChanged("medhor_hora_ini");
+					this.Onmedhor_hora_iniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_hora_fin", DbType="VarChar(50)")]
+		public string medhor_hora_fin
+		{
+			get
+			{
+				return this._medhor_hora_fin;
+			}
+			set
+			{
+				if ((this._medhor_hora_fin != value))
+				{
+					this.Onmedhor_hora_finChanging(value);
+					this.SendPropertyChanging();
+					this._medhor_hora_fin = value;
+					this.SendPropertyChanged("medhor_hora_fin");
+					this.Onmedhor_hora_finChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_estado", DbType="NChar(10)")]
+		public string medhor_estado
+		{
+			get
+			{
+				return this._medhor_estado;
+			}
+			set
+			{
+				if ((this._medhor_estado != value))
+				{
+					this.Onmedhor_estadoChanging(value);
+					this.SendPropertyChanging();
+					this._medhor_estado = value;
+					this.SendPropertyChanged("medhor_estado");
+					this.Onmedhor_estadoChanged();
 				}
 			}
 		}
@@ -1109,36 +1912,36 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medico_Medico_Horario", Storage="_Medico", ThisKey="med_id", OtherKey="med_id", IsForeignKey=true)]
-		public Medico Medico
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EspecialidadMedico_Medico_Horario", Storage="_EspecialidadMedico", ThisKey="espmed_id", OtherKey="espmed_id", IsForeignKey=true)]
+		public EspecialidadMedico EspecialidadMedico
 		{
 			get
 			{
-				return this._Medico.Entity;
+				return this._EspecialidadMedico.Entity;
 			}
 			set
 			{
-				Medico previousValue = this._Medico.Entity;
+				EspecialidadMedico previousValue = this._EspecialidadMedico.Entity;
 				if (((previousValue != value) 
-							|| (this._Medico.HasLoadedOrAssignedValue == false)))
+							|| (this._EspecialidadMedico.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Medico.Entity = null;
+						this._EspecialidadMedico.Entity = null;
 						previousValue.Medico_Horario.Remove(this);
 					}
-					this._Medico.Entity = value;
+					this._EspecialidadMedico.Entity = value;
 					if ((value != null))
 					{
 						value.Medico_Horario.Add(this);
-						this._med_id = value.med_id;
+						this._espmed_id = value.espmed_id;
 					}
 					else
 					{
-						this._med_id = default(int);
+						this._espmed_id = default(int);
 					}
-					this.SendPropertyChanged("Medico");
+					this.SendPropertyChanged("EspecialidadMedico");
 				}
 			}
 		}
@@ -1190,11 +1993,11 @@ namespace CapaDatos
 		
 		private string _paci_estatura;
 		
-		private string _paci_sintoma;
-		
 		private int _per_id;
 		
 		private EntitySet<Citas> _Citas;
+		
+		private EntitySet<Historial_Clinico> _Historial_Clinico;
 		
 		private EntityRef<Persona> _Persona;
 		
@@ -1210,8 +2013,6 @@ namespace CapaDatos
     partial void Onpaci_tiposangreChanged();
     partial void Onpaci_estaturaChanging(string value);
     partial void Onpaci_estaturaChanged();
-    partial void Onpaci_sintomaChanging(string value);
-    partial void Onpaci_sintomaChanged();
     partial void Onper_idChanging(int value);
     partial void Onper_idChanged();
     #endregion
@@ -1219,6 +2020,7 @@ namespace CapaDatos
 		public Paciente()
 		{
 			this._Citas = new EntitySet<Citas>(new Action<Citas>(this.attach_Citas), new Action<Citas>(this.detach_Citas));
+			this._Historial_Clinico = new EntitySet<Historial_Clinico>(new Action<Historial_Clinico>(this.attach_Historial_Clinico), new Action<Historial_Clinico>(this.detach_Historial_Clinico));
 			this._Persona = default(EntityRef<Persona>);
 			OnCreated();
 		}
@@ -1243,7 +2045,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_peso", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_peso", DbType="VarChar(10)")]
 		public string paci_peso
 		{
 			get
@@ -1283,7 +2085,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_estatura", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_estatura", DbType="VarChar(10)")]
 		public string paci_estatura
 		{
 			get
@@ -1299,26 +2101,6 @@ namespace CapaDatos
 					this._paci_estatura = value;
 					this.SendPropertyChanged("paci_estatura");
 					this.Onpaci_estaturaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_sintoma", DbType="NChar(10)")]
-		public string paci_sintoma
-		{
-			get
-			{
-				return this._paci_sintoma;
-			}
-			set
-			{
-				if ((this._paci_sintoma != value))
-				{
-					this.Onpaci_sintomaChanging(value);
-					this.SendPropertyChanging();
-					this._paci_sintoma = value;
-					this.SendPropertyChanged("paci_sintoma");
-					this.Onpaci_sintomaChanged();
 				}
 			}
 		}
@@ -1357,6 +2139,19 @@ namespace CapaDatos
 			set
 			{
 				this._Citas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Paciente_Historial_Clinico", Storage="_Historial_Clinico", ThisKey="paci_id", OtherKey="paci_id")]
+		public EntitySet<Historial_Clinico> Historial_Clinico
+		{
+			get
+			{
+				return this._Historial_Clinico;
+			}
+			set
+			{
+				this._Historial_Clinico.Assign(value);
 			}
 		}
 		
@@ -1425,6 +2220,18 @@ namespace CapaDatos
 			this.SendPropertyChanging();
 			entity.Paciente = null;
 		}
+		
+		private void attach_Historial_Clinico(Historial_Clinico entity)
+		{
+			this.SendPropertyChanging();
+			entity.Paciente = this;
+		}
+		
+		private void detach_Historial_Clinico(Historial_Clinico entity)
+		{
+			this.SendPropertyChanging();
+			entity.Paciente = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Persona")]
@@ -1445,7 +2252,7 @@ namespace CapaDatos
 		
 		private string _per_telefono;
 		
-		private System.DateTime _per_fechanacimiento;
+		private string _per_fechanacimiento;
 		
 		private string _per_genero;
 		
@@ -1453,13 +2260,13 @@ namespace CapaDatos
 		
 		private string _per_estado;
 		
-		private System.DateTime _per_fechaCreacion;
+		private string _per_fechaCreacion;
 		
 		private string _per_usuario;
 		
 		private string _per_contrasenia;
 		
-		private int _id_tipousu;
+		private System.Nullable<int> _id_tipousu;
 		
 		private EntitySet<Medico> _Medico;
 		
@@ -1483,7 +2290,7 @@ namespace CapaDatos
     partial void Onper_emailChanged();
     partial void Onper_telefonoChanging(string value);
     partial void Onper_telefonoChanged();
-    partial void Onper_fechanacimientoChanging(System.DateTime value);
+    partial void Onper_fechanacimientoChanging(string value);
     partial void Onper_fechanacimientoChanged();
     partial void Onper_generoChanging(string value);
     partial void Onper_generoChanged();
@@ -1491,13 +2298,13 @@ namespace CapaDatos
     partial void Onper_direccionChanged();
     partial void Onper_estadoChanging(string value);
     partial void Onper_estadoChanged();
-    partial void Onper_fechaCreacionChanging(System.DateTime value);
+    partial void Onper_fechaCreacionChanging(string value);
     partial void Onper_fechaCreacionChanged();
     partial void Onper_usuarioChanging(string value);
     partial void Onper_usuarioChanged();
     partial void Onper_contraseniaChanging(string value);
     partial void Onper_contraseniaChanged();
-    partial void Onid_tipousuChanging(int value);
+    partial void Onid_tipousuChanging(System.Nullable<int> value);
     partial void Onid_tipousuChanged();
     #endregion
 		
@@ -1589,7 +2396,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_email", DbType="VarChar(50)")]
 		public string per_email
 		{
 			get
@@ -1629,8 +2436,8 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_fechanacimiento", DbType="Date NOT NULL")]
-		public System.DateTime per_fechanacimiento
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_fechanacimiento", DbType="NVarChar(50)")]
+		public string per_fechanacimiento
 		{
 			get
 			{
@@ -1649,7 +2456,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_genero", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_genero", DbType="VarChar(50)")]
 		public string per_genero
 		{
 			get
@@ -1689,7 +2496,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_estado", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_estado", DbType="NVarChar(50)")]
 		public string per_estado
 		{
 			get
@@ -1709,8 +2516,8 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_fechaCreacion", DbType="Date NOT NULL")]
-		public System.DateTime per_fechaCreacion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_fechaCreacion", DbType="NVarChar(50)")]
+		public string per_fechaCreacion
 		{
 			get
 			{
@@ -1729,7 +2536,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_usuario", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_usuario", DbType="VarChar(50)")]
 		public string per_usuario
 		{
 			get
@@ -1749,7 +2556,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_contrasenia", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_contrasenia", DbType="VarChar(50)")]
 		public string per_contrasenia
 		{
 			get
@@ -1769,8 +2576,8 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_tipousu", DbType="Int NOT NULL")]
-		public int id_tipousu
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_tipousu", DbType="Int")]
+		public System.Nullable<int> id_tipousu
 		{
 			get
 			{
@@ -1846,7 +2653,7 @@ namespace CapaDatos
 					}
 					else
 					{
-						this._id_tipousu = default(int);
+						this._id_tipousu = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Tipo_usuario");
 				}
@@ -1908,6 +2715,8 @@ namespace CapaDatos
 		
 		private string _nombre_tipousu;
 		
+		private char _estado_tipousu;
+		
 		private EntitySet<Persona> _Persona;
 		
     #region Definiciones de métodos de extensibilidad
@@ -1918,6 +2727,8 @@ namespace CapaDatos
     partial void Onid_tipousuChanged();
     partial void Onnombre_tipousuChanging(string value);
     partial void Onnombre_tipousuChanged();
+    partial void Onestado_tipousuChanging(char value);
+    partial void Onestado_tipousuChanged();
     #endregion
 		
 		public Tipo_usuario()
@@ -1946,7 +2757,7 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string nombre_tipousu
 		{
 			get
@@ -1962,6 +2773,26 @@ namespace CapaDatos
 					this._nombre_tipousu = value;
 					this.SendPropertyChanged("nombre_tipousu");
 					this.Onnombre_tipousuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estado_tipousu", DbType="Char(1) NOT NULL")]
+		public char estado_tipousu
+		{
+			get
+			{
+				return this._estado_tipousu;
+			}
+			set
+			{
+				if ((this._estado_tipousu != value))
+				{
+					this.Onestado_tipousuChanging(value);
+					this.SendPropertyChanging();
+					this._estado_tipousu = value;
+					this.SendPropertyChanged("estado_tipousu");
+					this.Onestado_tipousuChanged();
 				}
 			}
 		}
@@ -2009,6 +2840,2400 @@ namespace CapaDatos
 		{
 			this.SendPropertyChanging();
 			entity.Tipo_usuario = null;
+		}
+	}
+	
+	public partial class Migrar_datos_personaResult
+	{
+		
+		private string _Nombres;
+		
+		private string _Apellidos;
+		
+		private System.Nullable<int> _Cédula;
+		
+		private string _Mail;
+		
+		private string _Dirección;
+		
+		public Migrar_datos_personaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellidos", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellidos
+		{
+			get
+			{
+				return this._Apellidos;
+			}
+			set
+			{
+				if ((this._Apellidos != value))
+				{
+					this._Apellidos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cédula", DbType="Int")]
+		public System.Nullable<int> Cédula
+		{
+			get
+			{
+				return this._Cédula;
+			}
+			set
+			{
+				if ((this._Cédula != value))
+				{
+					this._Cédula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mail", DbType="VarChar(50)")]
+		public string Mail
+		{
+			get
+			{
+				return this._Mail;
+			}
+			set
+			{
+				if ((this._Mail != value))
+				{
+					this._Mail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dirección", DbType="VarChar(100)")]
+		public string Dirección
+		{
+			get
+			{
+				return this._Dirección;
+			}
+			set
+			{
+				if ((this._Dirección != value))
+				{
+					this._Dirección = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_CitasResult
+	{
+		
+		private int _ID;
+		
+		private string _Estado;
+		
+		private string _Paciente;
+		
+		private string _Fecha;
+		
+		private string _Hora;
+		
+		private string _Doctor;
+		
+		private string _Motivo;
+		
+		public Mostrar_CitasResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(20)")]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paciente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Paciente
+		{
+			get
+			{
+				return this._Paciente;
+			}
+			set
+			{
+				if ((this._Paciente != value))
+				{
+					this._Paciente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hora", DbType="VarChar(101)")]
+		public string Hora
+		{
+			get
+			{
+				return this._Hora;
+			}
+			set
+			{
+				if ((this._Hora != value))
+				{
+					this._Hora = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Doctor", DbType="NVarChar(112)")]
+		public string Doctor
+		{
+			get
+			{
+				return this._Doctor;
+			}
+			set
+			{
+				if ((this._Doctor != value))
+				{
+					this._Doctor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Motivo", DbType="NChar(500) NOT NULL", CanBeNull=false)]
+		public string Motivo
+		{
+			get
+			{
+				return this._Motivo;
+			}
+			set
+			{
+				if ((this._Motivo != value))
+				{
+					this._Motivo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_Citas_xpacienteidResult
+	{
+		
+		private int _ID;
+		
+		private string _Estado;
+		
+		private string _Paciente;
+		
+		private string _Fecha;
+		
+		private string _Hora;
+		
+		private string _Doctor;
+		
+		private string _Motivo;
+		
+		public Mostrar_Citas_xpacienteidResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(20)")]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paciente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Paciente
+		{
+			get
+			{
+				return this._Paciente;
+			}
+			set
+			{
+				if ((this._Paciente != value))
+				{
+					this._Paciente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hora", DbType="VarChar(101)")]
+		public string Hora
+		{
+			get
+			{
+				return this._Hora;
+			}
+			set
+			{
+				if ((this._Hora != value))
+				{
+					this._Hora = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Doctor", DbType="NVarChar(112)")]
+		public string Doctor
+		{
+			get
+			{
+				return this._Doctor;
+			}
+			set
+			{
+				if ((this._Doctor != value))
+				{
+					this._Doctor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Motivo", DbType="NChar(500) NOT NULL", CanBeNull=false)]
+		public string Motivo
+		{
+			get
+			{
+				return this._Motivo;
+			}
+			set
+			{
+				if ((this._Motivo != value))
+				{
+					this._Motivo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_espe_mas_medicoResult
+	{
+		
+		private int _espmed_id;
+		
+		private string _md;
+		
+		public Mostrar_espe_mas_medicoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_espmed_id", DbType="Int NOT NULL")]
+		public int espmed_id
+		{
+			get
+			{
+				return this._espmed_id;
+			}
+			set
+			{
+				if ((this._espmed_id != value))
+				{
+					this._espmed_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_md", DbType="NVarChar(153) NOT NULL", CanBeNull=false)]
+		public string md
+		{
+			get
+			{
+				return this._md;
+			}
+			set
+			{
+				if ((this._md != value))
+				{
+					this._md = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_espe_medicoResult
+	{
+		
+		private int _ID;
+		
+		private string _Especialidad;
+		
+		private string _Médico;
+		
+		public Mostrar_espe_medicoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Especialidad", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Especialidad
+		{
+			get
+			{
+				return this._Especialidad;
+			}
+			set
+			{
+				if ((this._Especialidad != value))
+				{
+					this._Especialidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="VarChar(112)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_especialidadResult
+	{
+		
+		private int _ID;
+		
+		private string _Especialidad;
+		
+		private char _Estado;
+		
+		public Mostrar_especialidadResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Especialidad", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Especialidad
+		{
+			get
+			{
+				return this._Especialidad;
+			}
+			set
+			{
+				if ((this._Especialidad != value))
+				{
+					this._Especialidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="Char(1) NOT NULL")]
+		public char Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_medicoResult
+	{
+		
+		private int _ID;
+		
+		private string _Médico;
+		
+		public Mostrar_medicoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="VarChar(112)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_medico_fecha_horarioResult
+	{
+		
+		private int _ID;
+		
+		private string _Datos;
+		
+		public Mostrar_medico_fecha_horarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Datos", DbType="VarChar(271)")]
+		public string Datos
+		{
+			get
+			{
+				return this._Datos;
+			}
+			set
+			{
+				if ((this._Datos != value))
+				{
+					this._Datos = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_medico_horarioResult
+	{
+		
+		private int _ID;
+		
+		private string _Médico;
+		
+		private string _Fecha;
+		
+		private string _Horario;
+		
+		private string _Estado;
+		
+		public Mostrar_medico_horarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="VarChar(112)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Horario", DbType="VarChar(101)")]
+		public string Horario
+		{
+			get
+			{
+				return this._Horario;
+			}
+			set
+			{
+				if ((this._Horario != value))
+				{
+					this._Horario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="NChar(10)")]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_pacienteResult
+	{
+		
+		private int _ID;
+		
+		private string _paci_peso;
+		
+		private string _paci_tiposangre;
+		
+		private string _paci_estatura;
+		
+		private string _Paciente;
+		
+		public Mostrar_pacienteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_peso", DbType="VarChar(10)")]
+		public string paci_peso
+		{
+			get
+			{
+				return this._paci_peso;
+			}
+			set
+			{
+				if ((this._paci_peso != value))
+				{
+					this._paci_peso = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_tiposangre", DbType="VarChar(10)")]
+		public string paci_tiposangre
+		{
+			get
+			{
+				return this._paci_tiposangre;
+			}
+			set
+			{
+				if ((this._paci_tiposangre != value))
+				{
+					this._paci_tiposangre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_estatura", DbType="VarChar(10)")]
+		public string paci_estatura
+		{
+			get
+			{
+				return this._paci_estatura;
+			}
+			set
+			{
+				if ((this._paci_estatura != value))
+				{
+					this._paci_estatura = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paciente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Paciente
+		{
+			get
+			{
+				return this._Paciente;
+			}
+			set
+			{
+				if ((this._Paciente != value))
+				{
+					this._Paciente = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_PersonaResult
+	{
+		
+		private int _per_id;
+		
+		private string _per_nombres;
+		
+		private string _per_apellidos;
+		
+		private System.Nullable<int> _per_cedula;
+		
+		private string _per_email;
+		
+		private string _per_telefono;
+		
+		private string _per_fechanacimiento;
+		
+		private string _per_genero;
+		
+		private string _per_direccion;
+		
+		private string _per_estado;
+		
+		private string _per_fechaCreacion;
+		
+		private string _per_usuario;
+		
+		private string _per_contrasenia;
+		
+		private System.Nullable<int> _id_tipousu;
+		
+		public Mostrar_PersonaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_id", DbType="Int NOT NULL")]
+		public int per_id
+		{
+			get
+			{
+				return this._per_id;
+			}
+			set
+			{
+				if ((this._per_id != value))
+				{
+					this._per_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_nombres", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string per_nombres
+		{
+			get
+			{
+				return this._per_nombres;
+			}
+			set
+			{
+				if ((this._per_nombres != value))
+				{
+					this._per_nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_apellidos", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string per_apellidos
+		{
+			get
+			{
+				return this._per_apellidos;
+			}
+			set
+			{
+				if ((this._per_apellidos != value))
+				{
+					this._per_apellidos = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_cedula", DbType="Int")]
+		public System.Nullable<int> per_cedula
+		{
+			get
+			{
+				return this._per_cedula;
+			}
+			set
+			{
+				if ((this._per_cedula != value))
+				{
+					this._per_cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_email", DbType="VarChar(50)")]
+		public string per_email
+		{
+			get
+			{
+				return this._per_email;
+			}
+			set
+			{
+				if ((this._per_email != value))
+				{
+					this._per_email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_telefono", DbType="NChar(10)")]
+		public string per_telefono
+		{
+			get
+			{
+				return this._per_telefono;
+			}
+			set
+			{
+				if ((this._per_telefono != value))
+				{
+					this._per_telefono = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_fechanacimiento", DbType="NVarChar(50)")]
+		public string per_fechanacimiento
+		{
+			get
+			{
+				return this._per_fechanacimiento;
+			}
+			set
+			{
+				if ((this._per_fechanacimiento != value))
+				{
+					this._per_fechanacimiento = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_genero", DbType="VarChar(50)")]
+		public string per_genero
+		{
+			get
+			{
+				return this._per_genero;
+			}
+			set
+			{
+				if ((this._per_genero != value))
+				{
+					this._per_genero = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_direccion", DbType="VarChar(100)")]
+		public string per_direccion
+		{
+			get
+			{
+				return this._per_direccion;
+			}
+			set
+			{
+				if ((this._per_direccion != value))
+				{
+					this._per_direccion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_estado", DbType="NVarChar(50)")]
+		public string per_estado
+		{
+			get
+			{
+				return this._per_estado;
+			}
+			set
+			{
+				if ((this._per_estado != value))
+				{
+					this._per_estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_fechaCreacion", DbType="NVarChar(50)")]
+		public string per_fechaCreacion
+		{
+			get
+			{
+				return this._per_fechaCreacion;
+			}
+			set
+			{
+				if ((this._per_fechaCreacion != value))
+				{
+					this._per_fechaCreacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_usuario", DbType="VarChar(50)")]
+		public string per_usuario
+		{
+			get
+			{
+				return this._per_usuario;
+			}
+			set
+			{
+				if ((this._per_usuario != value))
+				{
+					this._per_usuario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_per_contrasenia", DbType="VarChar(50)")]
+		public string per_contrasenia
+		{
+			get
+			{
+				return this._per_contrasenia;
+			}
+			set
+			{
+				if ((this._per_contrasenia != value))
+				{
+					this._per_contrasenia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_tipousu", DbType="Int")]
+		public System.Nullable<int> id_tipousu
+		{
+			get
+			{
+				return this._id_tipousu;
+			}
+			set
+			{
+				if ((this._id_tipousu != value))
+				{
+					this._id_tipousu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Mostrar_personasResult
+	{
+		
+		private int _ID;
+		
+		private string _Nombres;
+		
+		private System.Nullable<int> _DNI;
+		
+		private string _Correo;
+		
+		private string _Dirección;
+		
+		private string _nombre_tipousu;
+		
+		public Mostrar_personasResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="Int")]
+		public System.Nullable<int> DNI
+		{
+			get
+			{
+				return this._DNI;
+			}
+			set
+			{
+				if ((this._DNI != value))
+				{
+					this._DNI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50)")]
+		public string Correo
+		{
+			get
+			{
+				return this._Correo;
+			}
+			set
+			{
+				if ((this._Correo != value))
+				{
+					this._Correo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dirección", DbType="VarChar(100)")]
+		public string Dirección
+		{
+			get
+			{
+				return this._Dirección;
+			}
+			set
+			{
+				if ((this._Dirección != value))
+				{
+					this._Dirección = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombre_tipousu
+		{
+			get
+			{
+				return this._nombre_tipousu;
+			}
+			set
+			{
+				if ((this._nombre_tipousu != value))
+				{
+					this._nombre_tipousu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_cita_idResult
+	{
+		
+		private int _cita_id;
+		
+		private string _cita_estado;
+		
+		private System.Nullable<int> _paci_id;
+		
+		private int _medhor_id;
+		
+		private string _cita_motivo;
+		
+		public sp_buscar_cita_idResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cita_id", DbType="Int NOT NULL")]
+		public int cita_id
+		{
+			get
+			{
+				return this._cita_id;
+			}
+			set
+			{
+				if ((this._cita_id != value))
+				{
+					this._cita_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cita_estado", DbType="VarChar(20)")]
+		public string cita_estado
+		{
+			get
+			{
+				return this._cita_estado;
+			}
+			set
+			{
+				if ((this._cita_estado != value))
+				{
+					this._cita_estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_id", DbType="Int")]
+		public System.Nullable<int> paci_id
+		{
+			get
+			{
+				return this._paci_id;
+			}
+			set
+			{
+				if ((this._paci_id != value))
+				{
+					this._paci_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medhor_id", DbType="Int NOT NULL")]
+		public int medhor_id
+		{
+			get
+			{
+				return this._medhor_id;
+			}
+			set
+			{
+				if ((this._medhor_id != value))
+				{
+					this._medhor_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cita_motivo", DbType="NChar(500) NOT NULL", CanBeNull=false)]
+		public string cita_motivo
+		{
+			get
+			{
+				return this._cita_motivo;
+			}
+			set
+			{
+				if ((this._cita_motivo != value))
+				{
+					this._cita_motivo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_cita_xpacienteResult
+	{
+		
+		private int _ID;
+		
+		private string _Estado;
+		
+		private string _Paciente;
+		
+		private string _Fecha;
+		
+		private string _Hora;
+		
+		private string _Doctor;
+		
+		private string _Motivo;
+		
+		public sp_buscar_cita_xpacienteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(20)")]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paciente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Paciente
+		{
+			get
+			{
+				return this._Paciente;
+			}
+			set
+			{
+				if ((this._Paciente != value))
+				{
+					this._Paciente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hora", DbType="VarChar(101)")]
+		public string Hora
+		{
+			get
+			{
+				return this._Hora;
+			}
+			set
+			{
+				if ((this._Hora != value))
+				{
+					this._Hora = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Doctor", DbType="NVarChar(112)")]
+		public string Doctor
+		{
+			get
+			{
+				return this._Doctor;
+			}
+			set
+			{
+				if ((this._Doctor != value))
+				{
+					this._Doctor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Motivo", DbType="NChar(500) NOT NULL", CanBeNull=false)]
+		public string Motivo
+		{
+			get
+			{
+				return this._Motivo;
+			}
+			set
+			{
+				if ((this._Motivo != value))
+				{
+					this._Motivo = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_especialidad_medico_xidResult
+	{
+		
+		private int _ID;
+		
+		private string _Médico;
+		
+		public sp_buscar_especialidad_medico_xidResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="NVarChar(165)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_especialidad_xdescripcionResult
+	{
+		
+		private int _ID;
+		
+		private string _Especialidad;
+		
+		private char _Estado;
+		
+		public sp_buscar_especialidad_xdescripcionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Especialidad", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Especialidad
+		{
+			get
+			{
+				return this._Especialidad;
+			}
+			set
+			{
+				if ((this._Especialidad != value))
+				{
+					this._Especialidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="Char(1) NOT NULL")]
+		public char Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_espemed_xmedicoResult
+	{
+		
+		private int _ID;
+		
+		private string _Especialidad;
+		
+		private string _Médico;
+		
+		public sp_buscar_espemed_xmedicoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Especialidad", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Especialidad
+		{
+			get
+			{
+				return this._Especialidad;
+			}
+			set
+			{
+				if ((this._Especialidad != value))
+				{
+					this._Especialidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="VarChar(112)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_medico_horario_xespemedResult
+	{
+		
+		private int _ID;
+		
+		private string _Datos;
+		
+		public sp_buscar_medico_horario_xespemedResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Datos", DbType="VarChar(268)")]
+		public string Datos
+		{
+			get
+			{
+				return this._Datos;
+			}
+			set
+			{
+				if ((this._Datos != value))
+				{
+					this._Datos = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_medico_horario_xmedicoResult
+	{
+		
+		private int _ID;
+		
+		private string _Médico;
+		
+		private string _Fecha;
+		
+		private string _Horario;
+		
+		private string _Estado;
+		
+		public sp_buscar_medico_horario_xmedicoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="VarChar(112)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Horario", DbType="VarChar(101)")]
+		public string Horario
+		{
+			get
+			{
+				return this._Horario;
+			}
+			set
+			{
+				if ((this._Horario != value))
+				{
+					this._Horario = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="NChar(10)")]
+		public string Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_medico_xpersonaResult
+	{
+		
+		private int _ID;
+		
+		private string _Médico;
+		
+		public sp_buscar_medico_xpersonaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Médico", DbType="VarChar(112)")]
+		public string Médico
+		{
+			get
+			{
+				return this._Médico;
+			}
+			set
+			{
+				if ((this._Médico != value))
+				{
+					this._Médico = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_paciente_xnombreResult
+	{
+		
+		private int _ID;
+		
+		private string _paci_peso;
+		
+		private string _paci_tiposangre;
+		
+		private string _paci_estatura;
+		
+		private string _Paciente;
+		
+		public sp_buscar_paciente_xnombreResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_peso", DbType="VarChar(10)")]
+		public string paci_peso
+		{
+			get
+			{
+				return this._paci_peso;
+			}
+			set
+			{
+				if ((this._paci_peso != value))
+				{
+					this._paci_peso = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_tiposangre", DbType="VarChar(10)")]
+		public string paci_tiposangre
+		{
+			get
+			{
+				return this._paci_tiposangre;
+			}
+			set
+			{
+				if ((this._paci_tiposangre != value))
+				{
+					this._paci_tiposangre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paci_estatura", DbType="VarChar(10)")]
+		public string paci_estatura
+		{
+			get
+			{
+				return this._paci_estatura;
+			}
+			set
+			{
+				if ((this._paci_estatura != value))
+				{
+					this._paci_estatura = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paciente", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Paciente
+		{
+			get
+			{
+				return this._Paciente;
+			}
+			set
+			{
+				if ((this._Paciente != value))
+				{
+					this._Paciente = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_persona_IDEResult
+	{
+		
+		private int _ID;
+		
+		private string _Nombres;
+		
+		private System.Nullable<int> _DNI;
+		
+		private string _Correo;
+		
+		private string _Dirección;
+		
+		private string _nombre_tipousu;
+		
+		public sp_buscar_persona_IDEResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="Int")]
+		public System.Nullable<int> DNI
+		{
+			get
+			{
+				return this._DNI;
+			}
+			set
+			{
+				if ((this._DNI != value))
+				{
+					this._DNI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50)")]
+		public string Correo
+		{
+			get
+			{
+				return this._Correo;
+			}
+			set
+			{
+				if ((this._Correo != value))
+				{
+					this._Correo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dirección", DbType="VarChar(100)")]
+		public string Dirección
+		{
+			get
+			{
+				return this._Dirección;
+			}
+			set
+			{
+				if ((this._Dirección != value))
+				{
+					this._Dirección = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombre_tipousu
+		{
+			get
+			{
+				return this._nombre_tipousu;
+			}
+			set
+			{
+				if ((this._nombre_tipousu != value))
+				{
+					this._nombre_tipousu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_persona_xapellidoResult
+	{
+		
+		private int _ID;
+		
+		private string _Nombres;
+		
+		private System.Nullable<int> _DNI;
+		
+		private string _Correo;
+		
+		private string _Dirección;
+		
+		private string _nombre_tipousu;
+		
+		public sp_buscar_persona_xapellidoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="Int")]
+		public System.Nullable<int> DNI
+		{
+			get
+			{
+				return this._DNI;
+			}
+			set
+			{
+				if ((this._DNI != value))
+				{
+					this._DNI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50)")]
+		public string Correo
+		{
+			get
+			{
+				return this._Correo;
+			}
+			set
+			{
+				if ((this._Correo != value))
+				{
+					this._Correo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dirección", DbType="VarChar(100)")]
+		public string Dirección
+		{
+			get
+			{
+				return this._Dirección;
+			}
+			set
+			{
+				if ((this._Dirección != value))
+				{
+					this._Dirección = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombre_tipousu
+		{
+			get
+			{
+				return this._nombre_tipousu;
+			}
+			set
+			{
+				if ((this._nombre_tipousu != value))
+				{
+					this._nombre_tipousu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_persona_xDNIResult
+	{
+		
+		private int _ID;
+		
+		private string _Nombres;
+		
+		private System.Nullable<int> _DNI;
+		
+		private string _Correo;
+		
+		private string _Dirección;
+		
+		private string _nombre_tipousu;
+		
+		public sp_buscar_persona_xDNIResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="Int")]
+		public System.Nullable<int> DNI
+		{
+			get
+			{
+				return this._DNI;
+			}
+			set
+			{
+				if ((this._DNI != value))
+				{
+					this._DNI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50)")]
+		public string Correo
+		{
+			get
+			{
+				return this._Correo;
+			}
+			set
+			{
+				if ((this._Correo != value))
+				{
+					this._Correo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dirección", DbType="VarChar(100)")]
+		public string Dirección
+		{
+			get
+			{
+				return this._Dirección;
+			}
+			set
+			{
+				if ((this._Dirección != value))
+				{
+					this._Dirección = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombre_tipousu
+		{
+			get
+			{
+				return this._nombre_tipousu;
+			}
+			set
+			{
+				if ((this._nombre_tipousu != value))
+				{
+					this._nombre_tipousu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_buscar_persona_xrollResult
+	{
+		
+		private int _ID;
+		
+		private string _Nombres;
+		
+		private System.Nullable<int> _DNI;
+		
+		private string _Correo;
+		
+		private string _Dirección;
+		
+		private string _nombre_tipousu;
+		
+		public sp_buscar_persona_xrollResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="Int")]
+		public System.Nullable<int> DNI
+		{
+			get
+			{
+				return this._DNI;
+			}
+			set
+			{
+				if ((this._DNI != value))
+				{
+					this._DNI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo", DbType="VarChar(50)")]
+		public string Correo
+		{
+			get
+			{
+				return this._Correo;
+			}
+			set
+			{
+				if ((this._Correo != value))
+				{
+					this._Correo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dirección", DbType="VarChar(100)")]
+		public string Dirección
+		{
+			get
+			{
+				return this._Dirección;
+			}
+			set
+			{
+				if ((this._Dirección != value))
+				{
+					this._Dirección = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombre_tipousu", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string nombre_tipousu
+		{
+			get
+			{
+				return this._nombre_tipousu;
+			}
+			set
+			{
+				if ((this._nombre_tipousu != value))
+				{
+					this._nombre_tipousu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_obtener_pacientesResult
+	{
+		
+		private string _Nombres;
+		
+		public sp_obtener_pacientesResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombres", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string Nombres
+		{
+			get
+			{
+				return this._Nombres;
+			}
+			set
+			{
+				if ((this._Nombres != value))
+				{
+					this._Nombres = value;
+				}
+			}
+		}
+	}
+	
+	public partial class tempo_mostrar_usuarioResult
+	{
+		
+		private System.Data.Linq.Binary _usu_foto;
+		
+		public tempo_mostrar_usuarioResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_foto", DbType="Image")]
+		public System.Data.Linq.Binary usu_foto
+		{
+			get
+			{
+				return this._usu_foto;
+			}
+			set
+			{
+				if ((this._usu_foto != value))
+				{
+					this._usu_foto = value;
+				}
+			}
 		}
 	}
 }

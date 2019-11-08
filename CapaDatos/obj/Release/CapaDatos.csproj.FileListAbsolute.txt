@@ -1,0 +1,7 @@
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\bin\Release\CapaDatos.dll.config
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\bin\Release\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\bin\Release\CapaDatos.pdb
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Release\CapaDatos.csprojAssemblyReference.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Release\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Release\CapaDatos.dll
+C:\Users\Xlorrd\Documents\Mega\Proyecto_integrador\6to\SistemaCitas\CapaDatos\obj\Release\CapaDatos.pdb

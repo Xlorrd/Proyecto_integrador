@@ -1,21 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ProyectoCitas" Class="BaseCitasDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-PPBPT44\SQLEXPRESS;Initial Catalog=ProyectoCitas;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="ProyectoCitasConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-MKA0APU\SQL;Initial Catalog=ProyectoCitas;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="ProyectoCitasConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Citas" Member="Citas">
     <Type Name="Citas">
       <Column Name="cita_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="cita_estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="paci_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="medhor_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="EspecialidadMedico_Citas" Member="EspecialidadMedico" ThisKey="espmed_id" OtherKey="espmed_id" Type="EspecialidadMedico" IsForeignKey="true" />
+      <Column Name="cita_motivo" Type="System.String" DbType="NChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Citas_Historial_Clinico" Member="Historial_Clinico" ThisKey="cita_id" OtherKey="cita_id" Type="Historial_Clinico" />
       <Association Name="Medico_Horario_Citas" Member="Medico_Horario" ThisKey="medhor_id" OtherKey="medhor_id" Type="Medico_Horario" IsForeignKey="true" />
       <Association Name="Paciente_Citas" Member="Paciente" ThisKey="paci_id" OtherKey="paci_id" Type="Paciente" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tbl_usuario" Member="Tbl_usuario">
+    <Type Name="Tbl_usuario">
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="per_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="usu_foto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.Especialidad" Member="Especialidad">
     <Type Name="Especialidad">
       <Column Name="espe_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="espe_descripcion" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="espe_descripcion" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="espe_estado" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
       <Association Name="Especialidad_EspecialidadMedico" Member="EspecialidadMedico" ThisKey="espe_id" OtherKey="espe_id" Type="EspecialidadMedico" />
     </Type>
   </Table>
@@ -24,40 +32,57 @@
       <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="med_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="espe_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="EspecialidadMedico_Citas" Member="Citas" ThisKey="espmed_id" OtherKey="espmed_id" Type="Citas" />
+      <Association Name="EspecialidadMedico_Historial_Clinico" Member="Historial_Clinico" ThisKey="espmed_id" OtherKey="espmed_id" Type="Historial_Clinico" />
+      <Association Name="EspecialidadMedico_Medico_Horario" Member="Medico_Horario" ThisKey="espmed_id" OtherKey="espmed_id" Type="Medico_Horario" />
       <Association Name="Especialidad_EspecialidadMedico" Member="Especialidad" ThisKey="espe_id" OtherKey="espe_id" Type="Especialidad" IsForeignKey="true" />
       <Association Name="Medico_EspecialidadMedico" Member="Medico" ThisKey="med_id" OtherKey="med_id" Type="Medico" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Historial_Clinico" Member="Historial_Clinico">
+    <Type Name="Historial_Clinico">
+      <Column Name="histocli_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cita_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="paci_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="histocli_diagnostico" Type="System.String" DbType="NChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="histocli_alergia" Type="System.String" DbType="NChar(500)" CanBeNull="true" />
+      <Column Name="histocli_receta" Type="System.String" DbType="NChar(500)" CanBeNull="true" />
+      <Column Name="histocli_enfermedad" Type="System.String" DbType="NChar(500)" CanBeNull="true" />
+      <Association Name="Citas_Historial_Clinico" Member="Citas" ThisKey="cita_id" OtherKey="cita_id" Type="Citas" IsForeignKey="true" />
+      <Association Name="EspecialidadMedico_Historial_Clinico" Member="EspecialidadMedico" ThisKey="espmed_id" OtherKey="espmed_id" Type="EspecialidadMedico" IsForeignKey="true" />
+      <Association Name="Paciente_Historial_Clinico" Member="Paciente" ThisKey="paci_id" OtherKey="paci_id" Type="Paciente" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Medico" Member="Medico">
     <Type Name="Medico">
       <Column Name="med_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="med_abreviatura" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="med_abreviatura" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="per_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Medico_EspecialidadMedico" Member="EspecialidadMedico" ThisKey="med_id" OtherKey="med_id" Type="EspecialidadMedico" />
-      <Association Name="Medico_Medico_Horario" Member="Medico_Horario" ThisKey="med_id" OtherKey="med_id" Type="Medico_Horario" />
       <Association Name="Persona_Medico" Member="Persona" ThisKey="per_id" OtherKey="per_id" Type="Persona" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Medico_Horario" Member="Medico_Horario">
     <Type Name="Medico_Horario">
       <Column Name="medhor_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="med_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="medhor_fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="medhor_hora" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="medhor_fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="medhor_hora_ini" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="medhor_hora_fin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="medhor_estado" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Association Name="Medico_Horario_Citas" Member="Citas" ThisKey="medhor_id" OtherKey="medhor_id" Type="Citas" />
-      <Association Name="Medico_Medico_Horario" Member="Medico" ThisKey="med_id" OtherKey="med_id" Type="Medico" IsForeignKey="true" />
+      <Association Name="EspecialidadMedico_Medico_Horario" Member="EspecialidadMedico" ThisKey="espmed_id" OtherKey="espmed_id" Type="EspecialidadMedico" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Paciente" Member="Paciente">
     <Type Name="Paciente">
       <Column Name="paci_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="paci_peso" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="paci_peso" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="paci_tiposangre" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="paci_estatura" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="paci_sintoma" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="paci_estatura" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="per_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Paciente_Citas" Member="Citas" ThisKey="paci_id" OtherKey="paci_id" Type="Citas" />
+      <Association Name="Paciente_Historial_Clinico" Member="Historial_Clinico" ThisKey="paci_id" OtherKey="paci_id" Type="Historial_Clinico" />
       <Association Name="Persona_Paciente" Member="Persona" ThisKey="per_id" OtherKey="per_id" Type="Persona" IsForeignKey="true" />
     </Type>
   </Table>
@@ -67,16 +92,16 @@
       <Column Name="per_nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="per_apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="per_cedula" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="per_email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="per_telefono" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="per_fechanacimiento" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="per_genero" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_fechanacimiento" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="per_genero" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="per_direccion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="per_estado" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="per_fechaCreacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="per_usuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="per_contrasenia" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="id_tipousu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="per_estado" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="per_fechaCreacion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="per_usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="per_contrasenia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="id_tipousu" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Persona_Medico" Member="Medico" ThisKey="per_id" OtherKey="per_id" Type="Medico" />
       <Association Name="Persona_Paciente" Member="Paciente" ThisKey="per_id" OtherKey="per_id" Type="Paciente" />
       <Association Name="Tipo_usuario_Persona" Member="Tipo_usuario" ThisKey="id_tipousu" OtherKey="id_tipousu" Type="Tipo_usuario" IsForeignKey="true" />
@@ -85,8 +110,300 @@
   <Table Name="dbo.Tipo_usuario" Member="Tipo_usuario">
     <Type Name="Tipo_usuario">
       <Column Name="id_tipousu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="estado_tipousu" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
       <Association Name="Tipo_usuario_Persona" Member="Persona" ThisKey="id_tipousu" OtherKey="id_tipousu" Type="Persona" />
     </Type>
   </Table>
+  <Function Name="dbo.Migrar_datos_persona" Method="Migrar_datos_persona">
+    <ElementType Name="Migrar_datos_personaResult">
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Cédula" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_Citas" Method="Mostrar_Citas">
+    <ElementType Name="Mostrar_CitasResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Paciente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Hora" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+      <Column Name="Doctor" Type="System.String" DbType="NVarChar(112)" CanBeNull="true" />
+      <Column Name="Motivo" Type="System.String" DbType="NChar(500) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_Citas_xpacienteid" Method="Mostrar_Citas_xpacienteid">
+    <Parameter Name="paci_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Mostrar_Citas_xpacienteidResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Paciente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Hora" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+      <Column Name="Doctor" Type="System.String" DbType="NVarChar(112)" CanBeNull="true" />
+      <Column Name="Motivo" Type="System.String" DbType="NChar(500) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_espe_mas_medico" Method="Mostrar_espe_mas_medico">
+    <ElementType Name="Mostrar_espe_mas_medicoResult">
+      <Column Name="espmed_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="md" Type="System.String" DbType="NVarChar(153) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_espe_medico" Method="Mostrar_espe_medico">
+    <ElementType Name="Mostrar_espe_medicoResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="VarChar(112)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_especialidad" Method="Mostrar_especialidad">
+    <ElementType Name="Mostrar_especialidadResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_medico" Method="Mostrar_medico">
+    <ElementType Name="Mostrar_medicoResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="VarChar(112)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_medico_fecha_horario" Method="Mostrar_medico_fecha_horario">
+    <ElementType Name="Mostrar_medico_fecha_horarioResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Datos" Type="System.String" DbType="VarChar(271)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_medico_horario" Method="Mostrar_medico_horario">
+    <ElementType Name="Mostrar_medico_horarioResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="VarChar(112)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Horario" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+      <Column Name="Estado" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_paciente" Method="Mostrar_paciente">
+    <ElementType Name="Mostrar_pacienteResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="paci_peso" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="paci_tiposangre" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="paci_estatura" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Paciente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_Persona" Method="Mostrar_Persona">
+    <ElementType Name="Mostrar_PersonaResult">
+      <Column Name="per_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="per_nombres" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="per_cedula" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="per_email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="per_telefono" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="per_fechanacimiento" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="per_genero" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="per_direccion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="per_estado" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="per_fechaCreacion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="per_usuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="per_contrasenia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="id_tipousu" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Mostrar_personas" Method="Mostrar_personas">
+    <ElementType Name="Mostrar_personasResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="DNI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_cita_id" Method="sp_buscar_cita_id">
+    <Parameter Name="cita_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_buscar_cita_idResult">
+      <Column Name="cita_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cita_estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="paci_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="medhor_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cita_motivo" Type="System.String" DbType="NChar(500) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_cita_xpaciente" Method="sp_buscar_cita_xpaciente">
+    <Parameter Name="nombres" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_cita_xpacienteResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Paciente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Hora" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+      <Column Name="Doctor" Type="System.String" DbType="NVarChar(112)" CanBeNull="true" />
+      <Column Name="Motivo" Type="System.String" DbType="NChar(500) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_especialidad_medico_xid" Method="sp_buscar_especialidad_medico_xid">
+    <Parameter Name="espe_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_buscar_especialidad_medico_xidResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="NVarChar(165)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_especialidad_xdescripcion" Method="sp_buscar_especialidad_xdescripcion">
+    <Parameter Name="espe_descripcion" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_especialidad_xdescripcionResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_espemed_xmedico" Method="sp_buscar_espemed_xmedico">
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_espemed_xmedicoResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="VarChar(112)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_medico_horario_xespemed" Method="sp_buscar_medico_horario_xespemed">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_buscar_medico_horario_xespemedResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Datos" Type="System.String" DbType="VarChar(268)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_medico_horario_xmedico" Method="sp_buscar_medico_horario_xmedico">
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_medico_horario_xmedicoResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="VarChar(112)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Horario" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+      <Column Name="Estado" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_medico_xpersona" Method="sp_buscar_medico_xpersona">
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_medico_xpersonaResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Médico" Type="System.String" DbType="VarChar(112)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_paciente_xnombre" Method="sp_buscar_paciente_xnombre">
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_paciente_xnombreResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="paci_peso" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="paci_tiposangre" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="paci_estatura" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Paciente" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_persona_IDE" Method="sp_buscar_persona_IDE">
+    <Parameter Name="per_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_buscar_persona_IDEResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="DNI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_persona_xapellido" Method="sp_buscar_persona_xapellido">
+    <Parameter Name="apellido" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_persona_xapellidoResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="DNI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_persona_xDNI" Method="sp_buscar_persona_xDNI">
+    <Parameter Name="per_cedula" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_persona_xDNIResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="DNI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_buscar_persona_xroll" Method="sp_buscar_persona_xroll">
+    <Parameter Name="roll" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="sp_buscar_persona_xrollResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+      <Column Name="DNI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dirección" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="nombre_tipousu" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_cancelar_cita" Method="sp_cancelar_cita">
+    <Parameter Name="cita_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_cita" Method="sp_eliminar_cita">
+    <Parameter Name="cita_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_especialidad" Method="sp_eliminar_especialidad">
+    <Parameter Name="espe_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_espemed" Method="sp_eliminar_espemed">
+    <Parameter Name="espmed_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_medico" Method="sp_eliminar_medico">
+    <Parameter Name="med_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_medico_horario" Method="sp_eliminar_medico_horario">
+    <Parameter Name="medhor_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_paciente" Method="sp_eliminar_paciente">
+    <Parameter Name="paci_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_persona" Method="sp_eliminar_persona">
+    <Parameter Name="per_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_obtener_pacientes" Method="sp_obtener_pacientes">
+    <Parameter Name="Nombres" Parameter="nombres" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="sp_obtener_pacientesResult">
+      <Column Name="Nombres" Type="System.String" DbType="VarChar(101) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_registrar_persona_login" Method="sp_registrar_persona_login">
+    <Parameter Name="per_nombres" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="per_apellidos" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="per_email" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="per_usuario" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="per_contrasenia" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="per_estado" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="per_fechaCreacion" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="id_tipousu" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_reservar_medico_horario" Method="sp_reservar_medico_horario">
+    <Parameter Name="medhor_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.tempo_mostrar_usuario" Method="tempo_mostrar_usuario">
+    <ElementType Name="tempo_mostrar_usuarioResult">
+      <Column Name="usu_foto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

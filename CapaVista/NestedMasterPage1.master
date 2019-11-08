@@ -1,0 +1,11 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MenuCliente.Master" AutoEventWireup="true" CodeBehind="NestedMasterPage1.master.cs" Inherits="CapaVista.NestedMasterPage1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="cph_header" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_user" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="Mini_menu" runat="server">
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="cph_titulo" runat="server">
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="cph_formu" runat="server">
+</asp:Content>
