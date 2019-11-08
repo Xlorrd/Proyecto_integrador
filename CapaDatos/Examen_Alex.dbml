@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Proyecto_Examen_Alex" Class="Examen_AlexDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Proyecto_Examen_Alex;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="Proyecto_Examen_AlexConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Tbl_Comprador" Member="Tbl_Comprador">
+    <Type Name="Tbl_Comprador">
+      <Column Name="com_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="com_nombre" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="com_apellido" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="cedula" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="correo" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="fechacreacion" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="estado" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tbl_Producto" Member="Tbl_Producto">
+    <Type Name="Tbl_Producto">
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pro_nombre" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="pro_fechacreacion" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="descripcion" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="precio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="estado" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.MostrarProducto" Method="MostrarProducto">
+    <ElementType Name="MostrarProductoResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pro_nombre" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="pro_fechacreacion" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="descripcion" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="precio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="estado" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_eliminar_comprador" Method="sp_eliminar_comprador">
+    <Parameter Name="com_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_eliminar_producto" Method="sp_eliminar_producto">
+    <Parameter Name="pro_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.MostrarComprador" Method="MostrarComprador">
+    <ElementType Name="MostrarCompradorResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="cedula" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="correo" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="estado" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

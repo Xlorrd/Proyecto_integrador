@@ -16,12 +16,12 @@ namespace CapaNegocio
   public  class UsuarioLogica
     {
         //instancia capa datos
-        public static DataClasses1DataContext dc = new DataClasses1DataContext();
+        public static BaseCitasDataContext dc = new BaseCitasDataContext();
         // hacer lo que es un select * from
 
-        public static List<Tbl_Usuario> Obtenerusuarios()
+        public static List<Persona> Obtenerusuarios()
         {
-            var Lista = dc.Tbl_Usuario.Where(usu => usu.usu_estado == 'A');
+            var Lista = dc.Persona.Where(usu => usu.per_estado == "A");
             return Lista.ToList();
         }
 
@@ -29,29 +29,31 @@ namespace CapaNegocio
 
         public static bool Autentificar(string nombre, String pass)
         {
-            var auto = dc.Tbl_Usuario.Any(usu => usu.usu_estado == 'A' & usu.usu_nomlogin.Equals(nombre)
-            & usu.usu_contrasenia.Equals(pass));
+            var auto = dc.Persona.Any(usu => usu.per_estado == "A" & usu.per_usuario.Equals(nombre)
+            & usu.per_contrasenia.Equals(pass));
             return auto;
         }
 
         //verificar un usuario en especifico 
 
-        public static Tbl_Usuario Autentificarlogin(String nombre, string pass)
+        public static Persona Autentificarlogin(String nombre, string pass)
         {
-            var nlogin = dc.Tbl_Usuario.Single(usu => usu.usu_estado == 'A' & usu.usu_nomlogin.Equals(nombre)
-            & usu.usu_contrasenia.Equals(pass));
+            var nlogin = dc.Persona.Single(usu => usu.per_estado == "A" & usu.per_usuario.Equals(nombre)
+            & usu.per_contrasenia.Equals(pass));
             return nlogin;
         }
 
         // metodo de guardar 
 
-        public static void save(Tbl_Usuario usuario)
+        public static void save(Persona usuario)
         {
+            DateTime fecha = new DateTime();
+            string alx = fecha.ToString("yyyyMMdd");
             try
             {
-                usuario.usu_estado = 'A';
-                usuario.usu_fechacreacion = DateTime.Now;
-                dc.Tbl_Usuario.InsertOnSubmit(usuario);
+                usuario.per_estado = "A";
+                usuario.per_fechaCreacion =alx;
+                dc.Persona.InsertOnSubmit(usuario);
                 dc.SubmitChanges();
             }
             catch (Exception ex)
@@ -85,7 +87,7 @@ namespace CapaNegocio
             {
                 smtp.Send(correoAdministrador, EnviarE, asunto, body);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "AlertUsuario", "Window.onload - " +
               //"function(){alert ('El usuario no existe');};", true);
@@ -117,7 +119,7 @@ namespace CapaNegocio
             {
                 smtp.Send(correoAdministrador, EnviarE, asunto, body);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "AlertUsuario", "Window.onload - " +
                 //"function(){alert ('El usuario no existe');};", true);

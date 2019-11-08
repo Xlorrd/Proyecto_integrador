@@ -4,65 +4,82 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using CapaNegocio;
 
 using CapaDatos;
+using CapaNegocio;
 
 namespace CapaVista
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        private EspecialidadMedico info = new EspecialidadMedico();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Request["cod"] != null)
+                {
+              
+                    
+                    int codigo = Convert.ToInt32(Request["cod"]);
+                    info = LogicaEspecialidadMedico.ObtenerEspeMedicoid(codigo);
+                    if (info != null)
+                    {
 
+                        RadioButtonList1.Text = info.espmed_id.ToString();
+                  
+                                           
+                    }
+                }
+                mdhorario();
+            }
         }
+
+
+        public void cargar()
+        {
+           
+
+            List<sp_buscar_especialidad_medico_xidResult> lista = new List<sp_buscar_especialidad_medico_xidResult>();
+            lista = LogicaEspecialidadMedico.BuscarMedEspexid(2);
+            EspecialidadMedico d = new EspecialidadMedico();
+
+            d = LogicaEspecialidadMedico.ObtenerEspeMedicoid(2);
+         
+            if (lista != null)
+            {
+                GridView1.DataSource = lista;
+                GridView1.DataBind();
+
+                CheckBoxList1.Items.Add("d");
+                CheckBoxList1.DataBind();
+
+                RadioButtonList1.DataSource = lista;
+                RadioButtonList1.DataBind();
+
+                DropDownList1.DataSource = lista;
+                DropDownList1.DataBind();
+                
+            }
+        }
+        public void mdhorario()
+        {
+            List<sp_buscar_especialidad_medico_xidResult> Lista = new List<sp_buscar_especialidad_medico_xidResult>();
+            Lista = LogicaEspecialidadMedico.BuscarMedEspexid(2);
+            Lista.Insert(0, new sp_buscar_especialidad_medico_xidResult() { Médico = "" });
+            RadioButtonList1.DataSource = Lista;
+            RadioButtonList1.DataTextField = "Médico";
+            RadioButtonList1.DataValueField = "ID";
+            RadioButtonList1.DataBind();
+        }
+
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Ingresar();
-        }
-
-        public void Ingresar()
-        {
-
-            lblMensaje.Visible = false;
-            if (string.IsNullOrEmpty(TextBox1.Text))
-            {
-                lblMensaje.Visible = true;
-                lblMensaje.Text = "Ingrese  un usuario";
-                return;
-            }
-
-            if (string.IsNullOrEmpty(TextBox2.Text))
-            {
-
-                lblMensaje.Visible = true;
-                lblMensaje.Text = "Ingrese  una clave";
-                return;
-            }
-
-            bool existe = UsuarioLogica.Autentificar(TextBox1.Text, TextBox2.Text);
-            {
-                if (existe)
-                {
-                    Tbl_Usuario usuario = new Tbl_Usuario();
-                    usuario = UsuarioLogica.Autentificarlogin(TextBox1.Text, TextBox2.Text);
-                    int tipousuario = usuario.Tusu_id;
-
-                    if (tipousuario == 1)
-                    {
-                        Session["New"] = TextBox1.Text;
-                        Response.Redirect("~/MenuAdministrador.aspx");
-
-                    }
-                }
-                else
-                {
-                    lblMensaje.Visible = true;
-                    lblMensaje.Text = " Datos incorrectos";
-                    return;
-                }
-            }
+            cargar();
         }
     }
+
+
 }

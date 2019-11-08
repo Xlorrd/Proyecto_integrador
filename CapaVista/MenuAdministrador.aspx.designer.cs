@@ -13,15 +13,6 @@ namespace CapaVista {
     public partial class MenuAdministrador {
         
         /// <summary>
-        /// Control usu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label usu;
-        
-        /// <summary>
         /// Control btn_salir.
         /// </summary>
         /// <remarks>
@@ -29,5 +20,14 @@ namespace CapaVista {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_salir;
+        
+        /// <summary>
+        /// Control usu.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label usu;
     }
 }

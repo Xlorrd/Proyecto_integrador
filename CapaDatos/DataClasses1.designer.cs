@@ -22,7 +22,7 @@ namespace CapaDatos
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="MASTERINDEX")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ProyectoCitas")]
 	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
 	{
 		
@@ -45,7 +45,7 @@ namespace CapaDatos
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::CapaDatos.Properties.Settings.Default.MASTERINDEXConnectionString, mappingSource)
+				base(global::CapaDatos.Properties.Settings.Default.ProyectoCitasConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -104,6 +104,13 @@ namespace CapaDatos
 			{
 				return this.GetTable<Tbl_Usuario>();
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Mostrar_Especialiad")]
+		public ISingleResult<Mostrar_EspecialiadResult> Mostrar_Especialiad()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Mostrar_EspecialiadResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -945,6 +952,68 @@ namespace CapaDatos
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class Mostrar_EspecialiadResult
+	{
+		
+		private int _ID;
+		
+		private string _Descripción;
+		
+		private char _Estado;
+		
+		public Mostrar_EspecialiadResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descripción", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Descripción
+		{
+			get
+			{
+				return this._Descripción;
+			}
+			set
+			{
+				if ((this._Descripción != value))
+				{
+					this._Descripción = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="Char(1) NOT NULL")]
+		public char Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this._Estado = value;
+				}
 			}
 		}
 	}
